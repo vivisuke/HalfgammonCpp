@@ -4,6 +4,7 @@
 #include <string>
 
 #define	is_empty()	empty()
+using uchar = unsigned char;
 
 const int N_CELLS = 12;
 const int BLACK = -1;
@@ -56,6 +57,7 @@ public:
 	bool	can_bear_off_all_black(int, int) const;
 	bool	can_bear_off_all_white(int, int) const;
 	void	update_pip_count();
+	void	gen_moves_2(char next, int d1, int d2);		//	先後手指定、複数着手生成 → m_vmoves[]
 	void	gen_moves_black_2(int d1, int d2);		//	複数着手生成 → m_vmoves[]
 	void	gen_moves_white_2(int d1, int d2);
 	void	gen_moves_black_1(Moves&, int d1, int start = 1);
@@ -74,6 +76,8 @@ public:
 	void	unmove_white(int src, int dst, bool hit=false);
 	void	unmove_black(const Move& mv) { unmove_black(mv.m_src, mv.m_dst, mv.m_hit); }
 	void	unmove_white(const Move& mv) { unmove_white(mv.m_src, mv.m_dst, mv.m_hit); }
+
+	void	playout(char next);
 
 public:
 	char 	m_cell[N_CELLS+2];

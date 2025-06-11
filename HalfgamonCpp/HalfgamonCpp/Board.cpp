@@ -1,9 +1,13 @@
 ﻿#include <iostream>
 #include <sstream>
+#include <random>
 #include <assert.h>
 #include "Board.h"
 
 using namespace std;
+
+std::mt19937 rgen(std::random_device{}()); // ランダムシード設定
+//std::mt19937 rgen(0); // シードを設定
 
 const char init_data[] = {0, 0, -2, 0, 3, 0, 0, -3, 3, 0, 0, -3, 0, 2, 0, 0};
 
@@ -126,6 +130,13 @@ bool Board::can_bear_off_white() const {
 	for (int i = 1; i != 4; ++i)
 		if (m_cell[i] > 0) n += m_cell[i];
 	return n == N_CHECKERS;
+}
+//	複数着手生成 → m_vmoves[]
+void Board::gen_moves_2(char next, int d1, int d2) {
+	if( next == BLACK )
+		gen_moves_black_2(d1, d2);
+	else
+		gen_moves_white_2(d1, d2);
 }
 //	複数着手生成 → m_vmoves[]
 void Board::gen_moves_black_2(int d1, int d2) {
@@ -499,6 +510,17 @@ void Board::unmove_white(int src, int dst, bool hit) {
 	} else
 		m_cell[dst] -= 1;
 	m_pip_white += src - dst;
+}
+void Board::playout(char next) {
+	int d1 = rgen() % 3 + 1;
+	int d2 = rgen() % 3 + 1;
+	gen_moves_2(next, d1, d2);
+	if( !m_vmoves.is_empty() ) {
+		int r = rgen() % m_vmoves.size();
+		cout << to_str(m_vmoves[r]) << endl;
+		move_black(m_vmoves[r]);
+		print();
+	}
 }
 //--------------------------------------------------------------------------------
 #define		TEST_EQU(v, exp)	test_equ(__FILE__, __LINE__, v, exp)
