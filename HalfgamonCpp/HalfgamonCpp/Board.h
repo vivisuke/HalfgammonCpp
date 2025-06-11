@@ -79,10 +79,10 @@ public:
 	char 	m_cell[N_CELLS+2];
 	char	m_bar_black;		//	0 - 駒数 at バー、駒がある場合はマイナス値
 	char	m_bar_white;		//	駒数 at バー
-	std::vector<Moves>		m_vmoves;
+	std::vector<Moves>	m_vmoves;	//	
 	Moves	m_moves_1;
 	Moves	m_moves;
-	int		m_n_d1_move;
+	int		m_n_d1_move;		//	d1 による可能着手数
 	int		m_pip_black;
 	int		m_pip_white;
 };
