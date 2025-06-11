@@ -42,6 +42,7 @@ public:
 	Board() {
 		init();
 	}
+	Board(const Board& other);		//	コピーコンストラクタ
 public:
 	void	init();
 	void	init(const char*);

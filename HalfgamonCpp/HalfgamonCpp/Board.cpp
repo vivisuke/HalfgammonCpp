@@ -26,6 +26,18 @@ string Move::to_str() const {
 }
 
 //--------------------------------------------------------------------------------
+Board::Board(const Board& other)
+	: m_bar_black(other.m_bar_black)
+	, m_bar_white(other.m_bar_white)
+	, m_vmoves(other.m_vmoves)		// std::vectorのコピーコンストラクタが呼ばれる
+	, m_moves_1(other.m_moves_1)	// Movesクラスのコピーコンストラクタが呼ばれる
+	, m_moves(other.m_moves)		// Movesクラスのコピーコンストラクタが呼ばれる
+	, m_n_d1_move(other.m_n_d1_move)
+	, m_pip_black(other.m_pip_black)
+	, m_pip_white(other.m_pip_white)
+{
+	std::copy(std::begin(other.m_cell), std::end(other.m_cell), std::begin(m_cell));
+}
 void Board::init() {
 	init(init_data);
 }
