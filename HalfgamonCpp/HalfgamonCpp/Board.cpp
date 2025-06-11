@@ -481,6 +481,12 @@ void Board::move_white(int src, int dst) {
 		m_cell[dst] += 1;
 	m_pip_white -= src - dst;
 }
+void Board::do_move(char next, const Moves& mvs) {
+	if( next == BLACK )
+		move_black(mvs);
+	else
+		move_white(mvs);
+}
 void Board::move_black(const Moves& mvs) {
 	for(int i = 0; i != mvs.size(); ++i)
 		move_black(mvs[i]);
@@ -512,14 +518,19 @@ void Board::unmove_white(int src, int dst, bool hit) {
 	m_pip_white += src - dst;
 }
 void Board::playout(char next) {
-	int d1 = rgen() % 3 + 1;
-	int d2 = rgen() % 3 + 1;
-	gen_moves_2(next, d1, d2);
-	if( !m_vmoves.is_empty() ) {
-		int r = rgen() % m_vmoves.size();
-		cout << to_str(m_vmoves[r]) << endl;
-		move_black(m_vmoves[r]);
-		print();
+	for(int i = 0; i != 200; ++i) {
+		int d1 = rgen() % 3 + 1;
+		int d2 = rgen() % 3 + 1;
+		gen_moves_2(next, d1, d2);
+		if( !m_vmoves.is_empty() ) {
+			int r = rgen() % m_vmoves.size();
+			cout << (i+1) << ": " << to_str(m_vmoves[r]) << endl;
+			do_move(next, m_vmoves[r]);
+			print();
+			if( m_pip_black == 0 || m_pip_white == 0 )
+				break;
+		}
+		next = (BLACK + WHITE) - next;
 	}
 }
 //--------------------------------------------------------------------------------

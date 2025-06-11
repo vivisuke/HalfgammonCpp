@@ -71,6 +71,7 @@ public:
 	void	move_black(const Move& mv) { move_black(mv.m_src, mv.m_dst); }
 	void	move_white(const Move& mv) { move_white(mv.m_src, mv.m_dst); }
 	void	unmove_black(int src, int dst, bool hit=false);
+	void	do_move(char next, const Moves& mvs);
 	void	move_black(const Moves& mvs);
 	void	move_white(const Moves& mvs);
 	void	unmove_white(int src, int dst, bool hit=false);
