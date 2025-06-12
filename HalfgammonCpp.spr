@@ -15,7 +15,7 @@
 0013 ● C 06/12            │ToDo│Board：状態保存・復帰関数？
 0014 ◎ C 06/12 06/12 0.001│ToDo│Board：コピーコンストラクタ？
 0015 ● C 06/12            │ToDo│Board::sel_moves_PMC()：純粋モンテカルロ法による着手選択
-0016 ● C 06/12            │ToDo│Board::sel_moves_random()
+0016 ◎ C 06/12 06/12 0.001│ToDo│Board::sel_moves_random()
 0017 ● C 06/12            │ToDo│Board::sel_moves_TS1()：単純評価関数＋１手先読みによる着手選択
 0018 ● C 06/12            │ToDo│Board::sel_moves_MCTS()：モンテカルロ木探索による着手選択
 0019 ● C 06/12            │ToDo│

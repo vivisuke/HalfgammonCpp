@@ -81,6 +81,7 @@ public:
 
 	int		playout(char next);
 	double	playout(int N_LOOP, char next) const;
+	const Moves&	sel_move_random(char next, int d1, int d2);
 
 public:
 	char 	m_cell[N_CELLS+2];

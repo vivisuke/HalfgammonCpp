@@ -557,6 +557,15 @@ int  Board::playout(char next) {
 	}
 	return 0;
 }
+const Moves& Board::sel_move_random(char next, int d1, int d2) {
+	static Moves mvs;
+	gen_moves_2(next, d1, d2);
+	if( m_vmoves.is_empty() ) {
+		return mvs;
+	}
+	int r = rgen() % m_vmoves.size();
+	return m_vmoves[r];
+}
 //--------------------------------------------------------------------------------
 #define		TEST_EQU(v, exp)	test_equ(__FILE__, __LINE__, v, exp)
 int n_tested = 0;
