@@ -11,12 +11,12 @@
 0009 ◎ C 06/10 06/12 0.001│ToDo│完全ラダム着手によるプレイアウトを可能に
 0010 ◎ C 06/12 06/12 0.001│ToDo│先後指定 gen_moves_2(next, d1, d2)
 0011 ◎ C 06/12 06/12 0.001│ToDo│先後指定 do_move(next, Moves)
-0012 ● C 06/12            │ToDo│Board::playout()：プレイアウト回数指定可能に
+0012 ◎ C 06/12 06/12 0.001│ToDo│Board::playout()：プレイアウト回数指定可能に
 0013 ● C 06/12            │ToDo│Board：状態保存・復帰関数？
 0014 ◎ C 06/12 06/12 0.001│ToDo│Board：コピーコンストラクタ？
-0015 ● C 06/12            │ToDo│
-0016 ● C 06/12            │ToDo│
-0017 ● C 06/12            │ToDo│
-0018 ● C 06/12            │ToDo│
+0015 ● C 06/12            │ToDo│Board::sel_moves_PMC()：純粋モンテカルロ法による着手選択
+0016 ● C 06/12            │ToDo│Board::sel_moves_random()
+0017 ● C 06/12            │ToDo│Board::sel_moves_TS1()：単純評価関数＋１手先読みによる着手選択
+0018 ● C 06/12            │ToDo│Board::sel_moves_MCTS()：モンテカルロ木探索による着手選択
 0019 ● C 06/12            │ToDo│
 0020 ● C 06/12            │ToDo│

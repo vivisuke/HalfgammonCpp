@@ -79,7 +79,8 @@ public:
 	void	unmove_black(const Move& mv) { unmove_black(mv.m_src, mv.m_dst, mv.m_hit); }
 	void	unmove_white(const Move& mv) { unmove_white(mv.m_src, mv.m_dst, mv.m_hit); }
 
-	void	playout(char next);
+	int		playout(char next);
+	double	playout(int N_LOOP, char next) const;
 
 public:
 	char 	m_cell[N_CELLS+2];

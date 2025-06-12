@@ -15,7 +15,8 @@ int main()
 		bd.move_black(bd.m_vmoves[0]);
 		bd.print();
 	}
-	bd.playout(BLACK);
+	auto r = bd.playout(1000, BLACK);
+	cout << "rate = " << r << endl;
 
     std::cout << "\nOK.\n";
 }

@@ -529,21 +529,33 @@ void Board::unmove_white(int src, int dst, bool hit) {
 		m_cell[dst] -= 1;
 	m_pip_white += src - dst;
 }
-void Board::playout(char next) {
-	for(int i = 0; i != 200; ++i) {
+double  Board::playout(int N_LOOP, char next) const {
+	int sum = 0;
+	for(int i = 0; i < N_LOOP; ++i) {
+		Board bd(*this);
+		sum += bd.playout(next);
+	}
+	return (double)sum / N_LOOP;
+}
+int  Board::playout(char next) {
+	for (int i = 0;;++i) {
 		int d1 = rgen() % 3 + 1;
 		int d2 = rgen() % 3 + 1;
 		gen_moves_2(next, d1, d2);
 		if( !m_vmoves.is_empty() ) {
 			int r = rgen() % m_vmoves.size();
-			cout << (i+1) << ": " << to_str(m_vmoves[r]) << endl;
+			//cout << (i+1) << ": " << to_str(m_vmoves[r]) << endl;
 			do_move(next, m_vmoves[r]);
-			print();
-			if( m_pip_black == 0 || m_pip_white == 0 )
-				break;
+			//print();
+			if( m_pip_black == 0 ) {
+				return BLACK;
+			} else if( m_pip_white == 0 ) {
+				return WHITE;
+			}
 		}
 		next = (BLACK + WHITE) - next;
 	}
+	return 0;
 }
 //--------------------------------------------------------------------------------
 #define		TEST_EQU(v, exp)	test_equ(__FILE__, __LINE__, v, exp)
