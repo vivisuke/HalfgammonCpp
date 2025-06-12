@@ -15,8 +15,14 @@ int main()
 		bd.move_black(bd.m_vmoves[0]);
 		bd.print();
 	}
-	auto r = bd.playout(1000, BLACK);
-	cout << "rate = " << r << endl;
+	if (false) {
+		auto r = bd.playout(1000, BLACK);
+		cout << "rate = " << r << endl;
+	}
+	auto mvs = bd.sel_move(AI_TYPE_PMC, BLACK, 2, 3);
+	cout << "mvs = " << to_str(mvs) << endl;
+	bd.do_move(BLACK, mvs);
+	bd.print();
 
     std::cout << "\nOK.\n";
 }

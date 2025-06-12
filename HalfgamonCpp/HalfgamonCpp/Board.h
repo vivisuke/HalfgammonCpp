@@ -6,6 +6,11 @@
 #define	is_empty()	empty()
 using uchar = unsigned char;
 
+enum {
+	AI_TYPE_RANDOM = 0,		//	ランダム
+	AI_TYPE_PMC,			//	純粋モンテカルロ
+};
+
 const int N_CELLS = 12;
 const int BLACK = -1;
 const int WHITE = 1;
@@ -82,6 +87,8 @@ public:
 	int		playout(char next);
 	double	playout(int N_LOOP, char next) const;
 	const Moves&	sel_move_random(char next, int d1, int d2);
+	const Moves&	sel_move_PMC(char next, int d1, int d2);
+	const Moves&	sel_move(uchar ai_type, char next, int d1, int d2);
 
 public:
 	char 	m_cell[N_CELLS+2];

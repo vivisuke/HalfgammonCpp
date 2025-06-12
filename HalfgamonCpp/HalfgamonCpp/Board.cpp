@@ -557,14 +557,38 @@ int  Board::playout(char next) {
 	}
 	return 0;
 }
+static Moves g_mvs;
+const Moves& Board::sel_move(uchar ai_type, char next, int d1, int d2) {
+	switch( ai_type ) {
+	case AI_TYPE_RANDOM:	return sel_move_random(next, d1, d2);
+	case AI_TYPE_PMC:		return sel_move_PMC(next, d1, d2);
+	}
+	return g_mvs;
+}
 const Moves& Board::sel_move_random(char next, int d1, int d2) {
-	static Moves mvs;
 	gen_moves_2(next, d1, d2);
 	if( m_vmoves.is_empty() ) {
-		return mvs;
+		return g_mvs;
 	}
 	int r = rgen() % m_vmoves.size();
 	return m_vmoves[r];
+}
+const Moves& Board::sel_move_PMC(char next, int d1, int d2) {
+	gen_moves_2(next, d1, d2);
+	int bestix = -1;
+	double maxev = -9999;
+	for(int ix = 0; ix < m_vmoves.size(); ++ix) {
+		Board bd(*this);
+		bd.do_move(next, m_vmoves[ix]);
+		auto ev = bd.playout(100, (BLACK+WHITE)-next) * next;
+		if( ev > maxev ) {
+			maxev = ev;
+			bestix = ix;
+		}
+	}
+	if (bestix >= 0)
+		return m_vmoves[bestix];
+	return g_mvs;
 }
 //--------------------------------------------------------------------------------
 #define		TEST_EQU(v, exp)	test_equ(__FILE__, __LINE__, v, exp)
