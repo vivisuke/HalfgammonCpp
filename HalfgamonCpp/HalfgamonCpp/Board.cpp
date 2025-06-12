@@ -11,6 +11,11 @@ std::mt19937 rgen(std::random_device{}()); // ランダムシード設定
 
 const char init_data[] = {0, 0, -2, 0, 3, 0, 0, -3, 3, 0, 0, -3, 0, 2, 0, 0};
 
+void roll_dice(int& d1, int& d2) {
+	d1 = rgen() % 3 + 1;
+	d2 = rgen() % 3 + 1;
+}
+
 //--------------------------------------------------------------------------------
 void Move::print(bool nl) const {
 	cout << (int)m_src << " to " << (int)m_dst
@@ -539,8 +544,10 @@ double  Board::playout(int N_LOOP, char next) const {
 }
 int  Board::playout(char next) {
 	for (int i = 0;;++i) {
-		int d1 = rgen() % 3 + 1;
-		int d2 = rgen() % 3 + 1;
+		//int d1 = rgen() % 3 + 1;
+		//int d2 = rgen() % 3 + 1;
+		int d1, d2;
+		roll_dice(d1, d2);
 		gen_moves_2(next, d1, d2);
 		if( !m_vmoves.is_empty() ) {
 			int r = rgen() % m_vmoves.size();

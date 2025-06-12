@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <random>
 
 #define	is_empty()	empty()
 using uchar = unsigned char;
@@ -22,6 +23,7 @@ const int N_CHECKERS = 8;			//	片方の駒数
 
 void	test_Board();
 
+//std::mt19937 rgen2(std::random_device{}()); // ランダムシード設定
 
 struct Move {
 public:
@@ -40,6 +42,7 @@ public:
 
 typedef std::vector<Move> Moves;
 std::string to_str(const Moves&);
+void roll_dice(int&, int&);
 
 class Board
 {
